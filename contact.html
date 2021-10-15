@@ -129,7 +129,7 @@
                                     class="contact-input" required="" />
                             </div>
                             <div class="form-input">
-                                <textarea name="w3lMessage" id="message" placeholder="Type your message here*"
+                                <textarea name="message" id="message" placeholder="Type your message here*"
                                     required=""></textarea>
                             </div>
                             <button class="btn button-style">Send Message</button>
@@ -270,6 +270,39 @@
     <!--bootstrap-->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- //bootstrap-->
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script>
+      $(function () {
+
+        $('form').on('submit', function (e) {
+
+          e.preventDefault();
+
+          $.ajax({
+            type: 'POST',
+            url: 'contact.php',
+            data: $(this).serialize() // getting filed value in serialize form
+            })
+            .done(function(data){ // if getting done then call.
+        
+            // show the response
+                if(data == "true"){
+                    alert("We received your info! You will hear from us within some time.");
+                }else{
+                    alert("Something went wrong! Please try again some time. Or contact at info@pcgsolution.in");
+                }
+        
+            })
+            .fail(function() { // if fail then getting message
+        
+            // just in case posting your form failed
+                    alert("Something went wrong! Please try again some time. Or contact at info@pcgsolution.in");
+            });
+
+        });
+
+      });
+    </script>
     <!-- //Js scripts -->
 </body>
 

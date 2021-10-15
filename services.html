@@ -254,8 +254,8 @@
                         <div class="app-4-connection">
                             <div class="newsletter">
                                 <label>Never Miss a Deal !</label>
-                                <form action="#" methos="GET" class="d-flex wrap-align">
-                                    <input type="email" placeholder="Enter your email id" required="required" />
+                                <form action="#" methos="POST" class="d-flex wrap-align">
+                                    <input type="email" name="email" placeholder="Enter your email id" required="required" />
                                     <button type="submit" class="button-style">Get Promocode</button>
                                 </form>
                             </div>
@@ -394,7 +394,39 @@
 
     <!--bootstrap-->
     <script src="assets/js/bootstrap.min.js"></script>
-    <!-- //bootstrap-->
+    <!-- //bootstrap--><script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script>
+      $(function () {
+
+        $('form').on('submit', function (e) {
+
+          e.preventDefault();
+
+          $.ajax({
+            type: 'POST',
+            url: 'offer.php',
+            data: $(this).serialize() // getting filed value in serialize form
+            })
+            .done(function(data){ // if getting done then call.
+        
+            // show the response
+                if(data == "true"){
+                    alert("We received your email! You will receive an email from us within an hour.");
+                }else{
+                    alert("Something went wrong! Please try again some time. Or contact at info@pcgsolution.in");
+                }
+        
+            })
+            .fail(function() { // if fail then getting message
+        
+            // just in case posting your form failed
+                    alert("Something went wrong! Please try again some time. Or contact at info@pcgsolution.in");
+            });
+
+        });
+
+      });
+    </script>
     <!-- //Js scripts -->
 </body>
 
